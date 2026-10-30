@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HEMO Revival</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eee;font-family:Arial;color:#333}
+header{background:#fff;border-bottom:1px solid #ccc;padding:15px}
+.logo{font-size:27px;font-weight:bold;color:#333}
+.logo span{color:#287db5}
+nav{background:#287db5;padding:12px;display:flex;gap:25px;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;font-weight:bold}
+main{max-width:1050px;margin:20px auto;padding:12px}
+.welcome{background:white;padding:25px;border:1px solid #ccc}
+h1{margin-top:0}
+button{background:#287db5;color:white;border:0;padding:12px 20px;border-radius:3px;cursor:pointer}
+.games{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px}
+.game{background:white;border:1px solid #ccc;padding:15px;text-align:center}
+.game .pic{font-size:55px;background:#dcebf5;padding:20px}
+.game button{margin-top:10px}
+.panel{background:white;border:1px solid #ccc;padding:18px;margin-top:18px}
+#world{display:none;background:#b8d9ef;padding:15px;margin-top:15px}
+#stage{height:330px;background:linear-gradient(#8ac8ef 0 65%,#65a65b 65%);position:relative;overflow:hidden}
+#player{position:absolute;left:45%;bottom:60px;font-size:55px;transition:left .12s}
+#controls{display:flex;justify-content:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+#controls button{min-width:65px}
+@media(max-width:600px){.games{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="logo">HEMO <span>REVIVAL</span></div></header>
+<nav>
+<a href="#" onclick="show('home')">Home</a>
+<a href="#" onclick="show('games')">Games</a>
+<a href="#" onclick="show('avatar')">Avatar</a>
+<a href="#" onclick="show('about')">About</a>
+</nav>
+<main id="app">
+<section class="welcome">
+<h1>Welcome to HEMO Revival!</h1>
+<p>Explore a classic gaming world inspired by 2017.</p>
+<button onclick="show('games')">Explore Games</button>
+</section>
+<h2>Featured Games</h2>
+<section class="games">
+<div class="game"><div class="pic">🏙️</div><h3>Town Life</h3><button onclick="play()">Play</button></div>
+<div class="game"><div class="pic">🧗</div><h3>Classic Obby</h3><button onclick="play()">Play</button></div>
+<div class="game"><div class="pic">🏝️</div><h3>Adventure</h3><button onclick="play()">Play</button></div>
+</section>
+<section id="world">
+<h2>HEMO World</h2>
+<p>Move your character around!</p>
+<div id="stage"><div id="player">🧍</div></div>
+<div id="controls">
+<button onclick="move(-5)">◀</button>
+<button onclick="jump()">JUMP</button>
+<button onclick="move(5)">▶</button>
+</div>
+<button onclick="stopGame()" style="margin-top:12px;background:#777">Exit Game</button>
+</section>
+</main>
+<script>
+function show(page){
+if(page==="games"){document.querySelector(".welcome").scrollIntoView()}
+else if(page==="avatar"){alert("Avatar customization coming soon!")}
+else if(page==="about"){alert("HEMO Revival is an independent classic-style project.")}
+else{window.scrollTo(0,0)}
+}
+function play(){
+document.getElementById("world").style.display="block";
+document.getElementById("world").scrollIntoView({behavior:"smooth"});
+}
+function stopGame(){document.getElementById("world").style.display="none"}
+let x=45;
+function move(n){
+x=Math.max(0,Math.min(90,x+n));
+document.getElementById("player").style.left=x+"%";
+}
+function jump(){
+let p=document.getElementById("player");
+p.style.bottom="145px";
+setTimeout(()=>p.style.bottom="60px",400);
+}
+</script>
+</body>
+</html>
